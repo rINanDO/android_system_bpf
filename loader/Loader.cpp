@@ -1008,7 +1008,8 @@ void initLogging() {
 void createBpfFsSubDirectories() {
     for (const auto& location : android::bpf::locations) {
         if (android::bpf::createSysFsBpfSubDir(location.prefix)) {
-            exit(120);
+    ALOGE("BPF Ignored 120: createSysFsBpfSubDir(%s)", location.prefix);
+//          exit(120);
         }
     }
 }
@@ -1021,9 +1022,9 @@ void legacyBpfLoader() {
             ALOGE("If this triggers reliably, you're probably missing kernel options or patches.");
             ALOGE("If this triggers randomly, you might be hitting some memory allocation "
                   "problems or startup script race.");
-            ALOGE("--- DO NOT EXPECT SYSTEM TO BOOT SUCCESSFULLY ---");
-            sleep(20);
-            exit(121);
+            ALOGE("BPF Ignored 122: CONTINUE SYSTEM TO BOOT ---");
+//            sleep(20);
+//            exit(121);
         }
     }
 }
@@ -1031,8 +1032,8 @@ void legacyBpfLoader() {
 void execNetBpfLoadDone() {
     const char* args[] = {"/apex/com.android.tethering/bin/netbpfload", "done", NULL};
     execve(args[0], (char**)args, environ);
-    ALOGE("FATAL: execve(): %d[%s]", errno, strerror(errno));
-    exit(122);
+    ALOGE("BPF Ignored 122: execve(): %d[%s]", errno, strerror(errno));
+//     exit(122);
 }
 
 void logVerbose(const char* msg) {

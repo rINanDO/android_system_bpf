@@ -51,7 +51,7 @@ extern "C" {
 void initLogging();
 void createBpfFsSubDirectories();
 void legacyBpfLoader();
-__noreturn void execNetBpfLoadDone();
+void execNetBpfLoadDone();
 
 // For logging from rust
 void logVerbose(const char* msg);
